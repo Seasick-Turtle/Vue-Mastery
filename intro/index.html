@@ -15,11 +15,18 @@
     <div class="product">
 
       <div class="product-image">
-        <img :src="image" alt="">
+        <!-- 
+          you can remove v-bind and just
+          use :src, :alt, etc to refer to
+          the data object in the Vue instance
+        -->
+        <img :src="image" alt="green vue mastery socks">
       </div>
 
       <div class="product-info">
         <h1>{{ product }}</h1>
+        <a :href="link" target=
+        "_blank">More products like this</a>
       </div>
     </div>
   
