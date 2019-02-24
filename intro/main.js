@@ -23,11 +23,7 @@ Vue.component('product', {
         <p v-else> Out of Stock</p>
         <p>Shipping: {{ shipping }} </p>
         
-        <ul>
-          <li v-for="detail in details">
-            {{ detail }}
-          </li>
-        </ul>
+        <product-details :details="details"></product-details>
 
         <div 
           class="color-box"
@@ -102,11 +98,27 @@ Vue.component('product', {
       return 2.99;
     }
   }
-})
+});
+
+Vue.component('product-details', {
+  props: {
+    details: {
+      type: Array, 
+      required: true
+    }
+  },
+  template: `
+    <ul>
+      <li v-for="detail in details">
+        {{ detail }}
+      </li>
+    </ul>
+  `
+});
 
 let app = new Vue({
   el: '#app',
   data: {
-    premium: false
+    premium: true
   }
 });
