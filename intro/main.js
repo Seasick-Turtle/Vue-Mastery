@@ -23,7 +23,11 @@ Vue.component('product', {
         <p v-else> Out of Stock</p>
         <p>Shipping: {{ shipping }} </p>
         
-        <product-details :details="details"></product-details>
+        <ul>
+          <li v-for="detail in details">
+            {{ detail }}
+          </li>
+        </ul>
 
         <div 
           class="color-box"
@@ -42,17 +46,12 @@ Vue.component('product', {
           Add to Cart
         </button>
 
-        <div class="cart">
-          <p>Cart({{ cart }})</p>
-        </div>
-
       </div>
     </div>
   `,
   data() {
     return { 
       brand: 'Vue Mastery',
-      cart: 0,
       details: ['80% cotton', '20% polyester', 'Gender-neutral'],
       product: 'Socks',
       selectedVariant: 0,
@@ -74,7 +73,7 @@ Vue.component('product', {
   }, 
   methods: {
     addToCart() {
-      this.cart++;
+      this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId);
     },
     updateProduct(index) {
       this.selectedVariant = index;
@@ -98,27 +97,17 @@ Vue.component('product', {
       return 2.99;
     }
   }
-});
-
-Vue.component('product-details', {
-  props: {
-    details: {
-      type: Array, 
-      required: true
-    }
-  },
-  template: `
-    <ul>
-      <li v-for="detail in details">
-        {{ detail }}
-      </li>
-    </ul>
-  `
-});
+})
 
 let app = new Vue({
   el: '#app',
   data: {
-    premium: true
+    premium: false,
+    cart: []
+  },
+  methods: {
+    updateCart(id) {
+      this.cart.push(id);
+    }
   }
 });
