@@ -8,7 +8,6 @@
       <h4 class="title">{{ event.title }}</h4>
       <span>{{ event.attendees.length }} attending</span>
     </div>
-    Show Event #1
   </router-link>
 </template>
 
